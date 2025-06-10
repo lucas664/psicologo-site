@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Footer from "./components/Footer";
 import JsonLd from "./components/JsonLd";
+import Breadcrumbs from "./components/Breadcrumbs";
 import Script from "next/script";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
@@ -80,6 +81,7 @@ export default function RootLayout({
           `}
         </Script>
         <Header />
+        <Breadcrumbs />
         <div style={{ marginTop: 80 }}>
           {children}
         </div>
