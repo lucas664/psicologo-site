@@ -13,6 +13,7 @@ import Script from "next/script";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.karinafreitaspsicologa.com.br'),
   title: "Karina Freitas - Psicóloga - CRP 06/156482",
   description: "Atendimento psicológico online para ajudar você a encontrar equilíbrio emocional e qualidade de vida. Especialista em ansiedade, depressão e relacionamentos.",
   keywords: "psicóloga, psicologia online, terapia online, ansiedade, depressão, relacionamentos, CRP 06/156482",
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "Karina Freitas - Psicóloga",
     images: [
       {
-        url: "https://www.karinafreitaspsicologa.com.br/psicologa_karina.png",
+        url: "/psicologa_karina.png",
         width: 1200,
         height: 630,
         alt: "Karina Freitas - Psicóloga",
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Karina Freitas - Psicóloga - CRP 06/156482",
     description: "Atendimento psicológico online para ajudar você a encontrar equilíbrio emocional e qualidade de vida.",
-    images: ["https://www.karinafreitaspsicologa.com.br/psicologa_karina.png"],
+    images: ["/psicologa_karina.png"],
   },
   robots: {
     index: true,
