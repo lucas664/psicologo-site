@@ -2,6 +2,20 @@
 
 import { useEffect, useState } from 'react';
 
+declare global {
+  interface Window {
+    gtag: (
+      command: string,
+      action: string,
+      params?: {
+        event_category?: string;
+        event_label?: string;
+        [key: string]: any;
+      }
+    ) => void;
+  }
+}
+
 export default function WhatsAppButton() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -15,6 +29,16 @@ export default function WhatsAppButton() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleClick = () => {
+    // Rastrear clique no WhatsApp
+    if (typeof window !== 'undefined' && 'gtag' in window) {
+      window.gtag('event', 'whatsapp_click', {
+        'event_category': 'engagement',
+        'event_label': 'floating_button'
+      });
+    }
+  };
+
   return (
     <a
       href="https://wa.me/5511976027447"
@@ -22,6 +46,7 @@ export default function WhatsAppButton() {
       rel="noopener noreferrer"
       className={`whatsapp-button ${isVisible ? 'visible' : ''}`}
       aria-label="Contato via WhatsApp"
+      onClick={handleClick}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

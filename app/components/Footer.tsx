@@ -2,10 +2,24 @@
 
 import Link from 'next/link';
 
+declare global {
+  interface Window {
+    gtag: (
+      command: string,
+      action: string,
+      params?: {
+        event_category?: string;
+        event_label?: string;
+        [key: string]: any;
+      }
+    ) => void;
+  }
+}
+
 export default function Footer() {
   const handleWhatsAppClick = () => {
     // Rastrear clique no WhatsApp
-    if (typeof window !== 'undefined' && window.gtag) {
+    if (typeof window !== 'undefined' && 'gtag' in window) {
       window.gtag('event', 'whatsapp_click', {
         'event_category': 'engagement',
         'event_label': 'footer_whatsapp'
@@ -15,7 +29,7 @@ export default function Footer() {
 
   const handleInstagramClick = () => {
     // Rastrear clique no Instagram
-    if (typeof window !== 'undefined' && window.gtag) {
+    if (typeof window !== 'undefined' && 'gtag' in window) {
       window.gtag('event', 'instagram_click', {
         'event_category': 'engagement',
         'event_label': 'footer_instagram'
