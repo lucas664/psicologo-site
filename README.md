@@ -11,9 +11,9 @@ Site profissional da Psicóloga Karina Freitas, desenvolvido com Next.js e Boots
 
 ## Instalação
 
-1. Clone o repositório:
+1. Clone o repositório: https://github.com/lucas664/psicologo-site  
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
+git clone
 ```
 
 2. Instale as dependências:
@@ -66,4 +66,4 @@ Para atualizar o site:
 
 ## Contato
 
-Para suporte ou dúvidas, entre em contato através do email: [SEU_EMAIL]
+Para suporte ou dúvidas, entre em contato através do email: lucas.gamez@hotmail.com
