@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['www.karinafreitaspsicologa.com.br'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.karinafreitaspsicologa.com.br',
+        port: '',
+        pathname: '/**',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   poweredByHeader: false,

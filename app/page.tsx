@@ -1,8 +1,25 @@
+'use client';
 import Image from "next/image";
 import Link from "next/link";
 import PageSchema from "./components/PageSchema";
+import { useEffect, useState } from "react";
+import Script from 'next/script';
 
 export default function Home() {
+  const [whatsappUrl, setWhatsappUrl] = useState('');
+
+  useEffect(() => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const message = encodeURIComponent('Olá, gostaria de agendar uma conversa inicial');
+    const phone = '5511976027447';
+    
+    setWhatsappUrl(
+      isMobile 
+        ? `whatsapp://send?phone=${phone}&text=${message}`
+        : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
+    );
+  }, []);
+
   return (
     <>
       <PageSchema
@@ -10,29 +27,70 @@ export default function Home() {
         title="Karina Freitas - Psicóloga - CRP 06/156482"
         description="Atendimento psicológico online para ajudar você a encontrar equilíbrio emocional e qualidade de vida. Especialista em ansiedade, depressão e relacionamentos."
         url="https://www.karinafreitaspsicologa.com.br"
-        image="https://www.karinafreitaspsicologa.com.br/psicologa_karina.png"
+        image="https://www.karinafreitaspsicologa.com.br/psicologa_karina_desktop.jpg"
       />
+      {/* Google Analytics - Carregado após a interatividade */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-WPDMW2RX4B"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WPDMW2RX4B');
+        `}
+      </Script>
+
       <main className="bg-light" style={{ minHeight: "100vh" }}>
-        {/* Seção Inicial - Hero Section
-            Mobile (< 768px):
-            - Imagem de fundo centralizada
-            - Texto centralizado e posicionado mais abaixo
-            - Botão centralizado
-            - Padding ajustado para telas pequenas
-            
-            Desktop (>= 768px):
-            - Imagem de fundo à direita
-            - Texto alinhado à esquerda
-            - Botão alinhado à esquerda
-            - Padding maior nas laterais
-        */}
+        {/* MOBILE: Imagem, botão, texto */}
+        <section className="d-block d-md-none py-5" style={{ background: 'rgba(0,0,0,0.1)' }}>
+          <div className="container">
+            <div>
+              <Image
+                src="/psicologa_karina_desktop.jpg"
+                alt="Karina Freitas - Psicóloga"
+                width={800}
+                height={800}
+                style={{ width: '100%', height: 'auto', objectFit: 'cover', borderRadius: 16 }}
+                priority
+                loading="eager"
+                quality={85}
+              />
+            </div>
+            <div className="my-4 text-center">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn text-white fw-semibold d-inline-block hover-shadow mb-3"
+                style={{ background: "#ddb08f", fontSize: "clamp(0.95rem, 3vw, 1.1rem)", padding: "clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)", borderRadius: "8px", transition: "all 0.3s ease" }}
+              >
+                AGENDAR CONVERSA INICIAL
+              </a>
+              <div>
+                <h1 className="fw-bold mb-4" style={{ fontSize: "clamp(1.5rem, 6vw, 2.2rem)", lineHeight: 1.2, color: '#ddb08f' }}>
+                  Muitas vezes o que mais nos machuca são os pensamentos e não o que de fato vivemos.
+                </h1>
+                <p style={{ color: "#ddb08f", fontSize: "clamp(0.95rem, 3vw, 1.1rem)", lineHeight: 1.6 }}>
+                  Karina Freitas<br />
+                  PSICÓLOGA CLÍNICA<br />
+                  CRP 06/156482
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* DESKTOP: Imagem em tela cheia com texto à esquerda */}
         <section
           id="inicio"
-          className="position-relative d-flex align-items-center justify-content-center justify-content-md-start text-white"
+          className="position-relative d-none d-md-flex align-items-center text-white"
           style={{
             minHeight: "100vh",
             height: "100dvh",
-            background: "url(/psicologa_karina.png) center center / contain no-repeat",
+            background: "url(/psicologa_karina_desktop.jpg) center center / cover no-repeat",
             padding: "clamp(16px, 5vw, 80px)",
             boxSizing: "border-box",
           }}
@@ -41,72 +99,66 @@ export default function Home() {
           <div
             className="position-absolute top-0 start-0 w-100 h-100"
             style={{ 
-              background: "linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%)",
+              background: "linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%)",
               zIndex: 1 
             }}
           ></div>
-
-          {/* Container do conteúdo principal
-              Mobile:
-              - Centralizado
-              - Largura máxima de 90%
-              - Texto centralizado
-              - Posicionado mais abaixo (padding-top)
-              
-              Desktop:
-              - Alinhado à esquerda
-              - Largura máxima de 480px
-              - Texto alinhado à esquerda
-              - Padding normal
-          */}
+          {/* Container do conteúdo principal */}
           <div 
-            className="position-relative text-center text-md-start w-100 w-md-auto" 
+            className="position-relative w-100" 
             style={{ 
               zIndex: 2,
-              maxWidth: "90%"
+              maxWidth: "1200px",
+              margin: "0 auto",
+              padding: "0 20px"
             }}
           >
-            {/* Título principal com tamanho responsivo */}
-            <h1 
-              className="fw-bold mb-4"
+            <div 
+              className="text-start"
               style={{
-                fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
-                lineHeight: 1.2
+                maxWidth: "600px"
               }}
             >
-              Muitas vezes o que mais nos machuca são os pensamentos e não o que de fato vivemos.
-            </h1>
-
-            {/* Botão de CTA com estilo responsivo */}
-            <a
-              href="http://wa.me/5511976027447"
-              target="_blank"
-              rel="noopener"
-              className="btn text-white fw-semibold mb-3 d-inline-block hover-shadow"
-              style={{ 
-                background: "#ddb08f", 
-                fontSize: "clamp(0.875rem, 2vw, 1rem)",
-                padding: "clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)",
-                borderRadius: "8px",
-                transition: "all 0.3s ease"
-              }}
-            >
-              AGENDAR CONVERSA INICIAL
-            </a>
-
-            {/* Informações de contato com estilo responsivo */}
-            <p 
-              className="mt-3"
-              style={{ 
-                color: "#ddb08f", 
-                fontSize: "clamp(0.875rem, 2vw, 1rem)",
-                lineHeight: 1.6
-              }}
-            >
-              Karina Freitas<br />
-              PSICÓLOGA CLÍNICA<br />
-              CRP 06/156482
-            </p>
+              {/* Título principal com tamanho responsivo */}
+              <h1 
+                className="fw-bold mb-4"
+                style={{
+                  fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+                  lineHeight: 1.2
+                }}
+              >
+                Muitas vezes o que mais nos machuca são os pensamentos e não o que de fato vivemos.
+              </h1>
+              {/* Botão de CTA com estilo responsivo */}
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn text-white fw-semibold mb-3 d-inline-block hover-shadow"
+                style={{ 
+                  background: "#ddb08f", 
+                  fontSize: "clamp(0.875rem, 2vw, 1rem)",
+                  padding: "clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)",
+                  borderRadius: "8px",
+                  transition: "all 0.3s ease"
+                }}
+              >
+                AGENDAR CONVERSA INICIAL
+              </a>
+              {/* Informações de contato com estilo responsivo */}
+              <p 
+                className="mt-3"
+                style={{ 
+                  color: "#ddb08f", 
+                  fontSize: "clamp(0.875rem, 2vw, 1rem)",
+                  lineHeight: 1.6
+                }}
+              >
+                Karina Freitas<br />
+                PSICÓLOGA CLÍNICA<br />
+                CRP 06/156482
+              </p>
+            </div>
           </div>
         </section>
 
@@ -233,8 +285,9 @@ export default function Home() {
           <div className="card border-0 shadow-sm p-4 text-center" style={{ borderRadius: 12 }}>
             <div className="d-flex justify-content-center gap-3 mb-4 flex-wrap">
               <a
-                href="https://wa.me/5511976027447"
+                href="https://wa.me/5511976027447?text=Olá,%20gostaria%20de%20agendar%20uma%20conversa%20inicial"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="btn d-flex align-items-center gap-2"
                 style={{ background: "#ddb08f", color: "#fff", fontWeight: 600, fontSize: "1rem" }}
               >
@@ -243,6 +296,7 @@ export default function Home() {
               <a
                 href="https://www.instagram.com/karinafreitaspsicologa"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="btn border d-flex align-items-center justify-content-center p-0"
                 style={{
                   background: "#fff",

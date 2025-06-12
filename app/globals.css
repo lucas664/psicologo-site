@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
   --background: #f5eee6;
   --foreground: #3a2c23;
@@ -8,6 +10,10 @@
   --button-bg: #b35c1e;
   --button-hover: #a0522d;
   --button-text: #fff;
+  --primary-color: #2b4c6f;
+  --secondary-color: #ddb08f;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -170,4 +176,339 @@ a:hover {
   background-color: #128C7E;
   transform: scale(1.1);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Header Styles */
+.navbar {
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand img {
+  transition: all 0.3s ease;
+}
+
+.nav-link {
+  color: var(--primary-color) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--secondary-color) !important;
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+  }
+
+  .navbar-toggler {
+    padding: 0.5rem;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+
+  .nav-link {
+    padding: 0.75rem 1rem !important;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Breadcrumbs Styles */
+.breadcrumb {
+  margin-bottom: 0;
+  padding: 0.5rem 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+}
+
+.breadcrumb-item a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: var(--secondary-color);
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(rgba(43, 76, 111, 0.9), rgba(43, 76, 111, 0.9)), url('/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 6rem 0;
+  margin-top: 80px;
+}
+
+/* Services Section */
+.service-card {
+  border: none;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1.5rem;
+}
+
+/* Benefits Section */
+.benefits-section {
+  background-color: var(--light-bg);
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.benefit-icon {
+  color: var(--secondary-color);
+  font-size: 1.5rem;
+}
+
+/* Process Section */
+.process-step {
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 2rem;
+}
+
+.process-step::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background-color: var(--secondary-color);
+}
+
+.step-number {
+  position: absolute;
+  left: -1rem;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* About Section */
+.about-image {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.about-content {
+  padding: 2rem;
+}
+
+/* Contact Section */
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--light-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 4rem 0 2rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--secondary-color);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* Blog Styles */
+.blog-card {
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.blog-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.blog-content {
+  padding: 1.5rem;
+}
+
+.blog-date {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+.blog-title {
+  color: var(--primary-color);
+  margin: 0.5rem 0;
+}
+
+.blog-excerpt {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+  .hero-section {
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .about-image {
+    margin-bottom: 2rem;
+  }
+
+  .process-step {
+    padding-left: 2.5rem;
+  }
+
+  .footer {
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}
+
+/* Utility Classes */
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.text-secondary {
+  color: var(--secondary-color) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary-color) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.btn-outline-secondary {
+  color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--secondary-color) !important;
+  color: white !important;
 }

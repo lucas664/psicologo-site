@@ -1,55 +1,41 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
   
-  // Remove a barra inicial e divide o caminho em segmentos
-  const segments = pathname.split('/').filter(segment => segment);
+  if (pathname === '/') return null;
+
+  const segments = pathname.split('/').filter(Boolean);
   
-  // Cria o array de breadcrumbs
   const breadcrumbs = segments.map((segment, index) => {
-    // Constrói o caminho até este segmento
-    const path = `/${segments.slice(0, index + 1).join('/')}`;
-    
-    // Formata o texto do breadcrumb
-    const label = segment
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+    const href = `/${segments.slice(0, index + 1).join('/')}`;
+    const label = segment.charAt(0).toUpperCase() + segment.slice(1);
     
     return {
-      label,
-      path,
-      isLast: index === segments.length - 1
+      href,
+      label: label === 'Blog' ? 'Blog' : label
     };
-  });
-
-  // Adiciona a página inicial
-  breadcrumbs.unshift({
-    label: 'Início',
-    path: '/',
-    isLast: segments.length === 0
   });
 
   return (
     <nav aria-label="breadcrumb" className="bg-light py-2">
       <div className="container">
         <ol className="breadcrumb mb-0">
-          {breadcrumbs.map(({ label, path, isLast }, index) => (
-            <li
-              key={path}
-              className={`breadcrumb-item ${isLast ? 'active' : ''}`}
-              aria-current={isLast ? 'page' : undefined}
+          <li className="breadcrumb-item">
+            <Link href="/">Home</Link>
+          </li>
+          {breadcrumbs.map((crumb, index) => (
+            <li 
+              key={crumb.href} 
+              className={`breadcrumb-item ${index === breadcrumbs.length - 1 ? 'active' : ''}`}
             >
-              {isLast ? (
-                <span>{label}</span>
+              {index === breadcrumbs.length - 1 ? (
+                crumb.label
               ) : (
-                <Link href={path} className="text-decoration-none">
-                  {label}
-                </Link>
+                <Link href={crumb.href}>{crumb.label}</Link>
               )}
             </li>
           ))}
