@@ -93,12 +93,12 @@ export default function Home() {
         {/* DESKTOP: Imagem em tela cheia com texto à esquerda */}
         <section
           id="inicio"
-          className="position-relative d-none d-md-flex align-items-center text-white"
+          className="position-relative d-none d-md-flex align-items-start text-white"
           style={{
             minHeight: "100vh",
             height: "100dvh",
             background: "url(/psicologa_karina_desktop.jpg) center center / cover no-repeat",
-            padding: "clamp(16px, 5vw, 80px)",
+            padding: "0",
             boxSizing: "border-box",
           }}
         >
@@ -116,8 +116,8 @@ export default function Home() {
             style={{ 
               zIndex: 2,
               maxWidth: "1200px",
-              margin: "0 auto",
-              padding: "0 20px"
+              margin: "0",
+              padding: "80px 0 0 40px"
             }}
           >
             <div 
