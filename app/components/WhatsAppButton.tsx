@@ -18,12 +18,23 @@ declare global {
 
 export default function WhatsAppButton() {
   const [isVisible, setIsVisible] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsVisible(scrollPosition > 300); // Mostra o botão após rolar 300px
     };
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const message = encodeURIComponent('Olá, gostaria de agendar uma conversa inicial');
+    const phone = '5511976027447';
+    
+    setWhatsappUrl(
+      isMobile 
+        ? `whatsapp://send?phone=${phone}&text=${message}`
+        : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
+    );
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -41,7 +52,7 @@ export default function WhatsAppButton() {
 
   return (
     <a
-      href="https://wa.me/5511976027447"
+      href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={`whatsapp-button ${isVisible ? 'visible' : ''}`}

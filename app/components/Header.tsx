@@ -18,36 +18,51 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-  const closeMenu = () => {
-    setIsMenuOpen(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('/#', '');
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      const headerOffset = 80;
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    
+    closeMenu();
   };
 
   const navLinks = [
-    { href: '/', label: 'Início' },
-    { href: '/sobre', label: 'Sobre' },
-    { href: '/especialidades', label: 'Especialidades' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/contato', label: 'Contato' },
+    { href: '/#inicio', label: 'Início' },
+    { href: '/#especialidades', label: 'Especialidades' },
+    { href: '/#beneficios', label: 'Benefícios' },
+    { href: '/#processos', label: 'Processos' },
+    { href: '/#sobre', label: 'Sobre' },
+    { href: '/#contato', label: 'Contato' },
   ];
 
   return (
     <header className={`fixed-top ${isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'}`}>
-      <nav className="navbar navbar-expand-lg align-items-center" style={{ minHeight: 90 }}>
-        <div className="container d-flex align-items-center justify-content-between">
-          <Link href="/" className="navbar-brand d-flex align-items-center" onClick={closeMenu} style={{ padding: 0 }}>
+      <nav className="navbar navbar-expand-lg">
+        <div className="container-fluid">
+          <Link href="/" className="navbar-brand" onClick={closeMenu}>
             <Image
-              src="/logo_karina.svg"
+              src="/Karina_Freitas_logo.png"
               alt="Karina Freitas - Psicóloga"
-              width={220}
-              height={0}
-              style={{ height: 'auto', maxHeight: 80, width: 'auto' }}
+              fill
               priority
-              className="img-fluid"
+              style={{ objectFit: 'contain' }}
             />
           </Link>
+
           <button
             className="navbar-toggler border-0"
             type="button"
@@ -56,14 +71,15 @@ export default function Header() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`}> 
-            <ul className="navbar-nav ms-auto">
+
+          <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`}>
+            <ul className="navbar-nav">
               {navLinks.map((link) => (
                 <li key={link.href} className="nav-item">
                   <Link
                     href={link.href}
                     className={`nav-link ${pathname === link.href ? 'active' : ''}`}
-                    onClick={closeMenu}
+                    onClick={(e) => handleNavClick(e, link.href)}
                   >
                     {link.label}
                   </Link>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 declare global {
   interface Window {
@@ -17,6 +18,20 @@ declare global {
 }
 
 export default function Footer() {
+  const [whatsappUrl, setWhatsappUrl] = useState('');
+
+  useEffect(() => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const message = encodeURIComponent('Olá, gostaria de agendar uma conversa inicial');
+    const phone = '5511976027447';
+    
+    setWhatsappUrl(
+      isMobile 
+        ? `whatsapp://send?phone=${phone}&text=${message}`
+        : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
+    );
+  }, []);
+
   const handleWhatsAppClick = () => {
     // Rastrear clique no WhatsApp
     if (typeof window !== 'undefined' && 'gtag' in window) {
@@ -50,11 +65,12 @@ export default function Footer() {
             <h5>Contato</h5>
             <div className="d-flex justify-content-md-end gap-3">
               <a
-                href="https://wa.me/5511976027447"
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-light"
                 onClick={handleWhatsAppClick}
+                style={{ textDecoration: "none" }}
               >
                 <i className="bi bi-whatsapp"></i> WhatsApp
               </a>
@@ -64,6 +80,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-light"
                 onClick={handleInstagramClick}
+                style={{ textDecoration: "none" }}
               >
                 <i className="bi bi-instagram"></i> Instagram
               </a>

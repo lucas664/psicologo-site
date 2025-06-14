@@ -65,7 +65,14 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn text-white fw-semibold d-inline-block hover-shadow mb-3"
-                style={{ background: "#ddb08f", fontSize: "clamp(0.95rem, 3vw, 1.1rem)", padding: "clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)", borderRadius: "8px", transition: "all 0.3s ease" }}
+                style={{ 
+                  background: "#ddb08f", 
+                  fontSize: "clamp(0.95rem, 3vw, 1.1rem)", 
+                  padding: "clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)", 
+                  borderRadius: "8px", 
+                  transition: "all 0.3s ease",
+                  textDecoration: "none"
+                }}
               >
                 AGENDAR CONVERSA INICIAL
               </a>
@@ -121,7 +128,7 @@ export default function Home() {
             >
               {/* Título principal com tamanho responsivo */}
               <h1 
-                className="fw-bold mb-4"
+                className="fw-bold mb-4 text-white"
                 style={{
                   fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
                   lineHeight: 1.2
@@ -140,16 +147,16 @@ export default function Home() {
                   fontSize: "clamp(0.875rem, 2vw, 1rem)",
                   padding: "clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)",
                   borderRadius: "8px",
-                  transition: "all 0.3s ease"
+                  transition: "all 0.3s ease",
+                  textDecoration: "none"
                 }}
               >
                 AGENDAR CONVERSA INICIAL
               </a>
               {/* Informações de contato com estilo responsivo */}
               <p 
-                className="mt-3"
+                className="mt-3 text-white"
                 style={{ 
-                  color: "#ddb08f", 
                   fontSize: "clamp(0.875rem, 2vw, 1rem)",
                   lineHeight: 1.6
                 }}
@@ -285,11 +292,18 @@ export default function Home() {
           <div className="card border-0 shadow-sm p-4 text-center" style={{ borderRadius: 12 }}>
             <div className="d-flex justify-content-center gap-3 mb-4 flex-wrap">
               <a
-                href="https://wa.me/5511976027447?text=Olá,%20gostaria%20de%20agendar%20uma%20conversa%20inicial"
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn d-flex align-items-center gap-2"
-                style={{ background: "#ddb08f", color: "#fff", fontWeight: 600, fontSize: "1rem" }}
+                style={{ 
+                  background: "#ddb08f", 
+                  color: "#fff", 
+                  fontWeight: 600, 
+                  fontSize: "1rem",
+                  textDecoration: "none",
+                  transition: "all 0.3s ease"
+                }}
               >
                 FALAR NO WHATSAPP
               </a>
