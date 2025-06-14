@@ -4,6 +4,11 @@ import Link from "next/link";
 import PageSchema from "./components/PageSchema";
 import { useEffect, useState } from "react";
 import Script from 'next/script';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { FaRegSadTear, FaHeartBroken, FaUserFriends, FaUserShield, FaRegGrinStars, FaBrain } from 'react-icons/fa';
+import { MdOutlineWorkOutline, MdOutlinePsychology, MdOutlineSelfImprovement } from 'react-icons/md';
+import { GiBrokenHeart, GiBrain, GiDiscussion } from 'react-icons/gi';
 
 export default function Home() {
   const [whatsappUrl, setWhatsappUrl] = useState('');
@@ -18,6 +23,15 @@ export default function Home() {
         ? `whatsapp://send?phone=${phone}&text=${message}`
         : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
     );
+
+    // Inicializa AOS apenas no cliente
+    if (typeof window !== 'undefined') {
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+      });
+    }
   }, []);
 
   return (
@@ -177,29 +191,48 @@ export default function Home() {
           <h2 className="text-center fw-bold mb-5 text-primary fs-3 fs-md-2">
             Especialidades
           </h2>
-          {/* Grid de cards
-              - row: classe do Bootstrap para linha
-              - g-4: gap entre os cards
-          */}
-          <div className="row g-4">
-            {/* Mapeamento das especialidades
-                - col-12 col-sm-6 col-lg-4: grid responsivo
-                - card: classe do Bootstrap para cards
-                - h-100: altura 100%
-                - border-0: sem borda
-                - shadow-sm: sombra suave
-            */}
-            {especialidades.map(({ icon, title, desc }, index) => (
-              <div key={index} className="col-12 col-sm-6 col-lg-4">
-                <div className="card h-100 border-0 shadow-sm ps-3" style={{ borderLeft: "4px solid #2b4c6f", borderRadius: 16 }}>
-                  <div className="card-body">
-                    <span className="fs-2">{icon}</span>
-                    <h3 className="fw-semibold mt-3 fs-5" style={{ color: "#2b4c6f" }}>{title}</h3>
-                    <p className="text-secondary mt-2 fs-6">{desc}</p>
-                  </div>
-                </div>
+          <div className="row">
+            {/* Imagem na esquerda (desktop) ou em cima (mobile) */}
+            <div className="col-12 col-lg-4 mb-4 mb-lg-0">
+              <div className="d-flex justify-content-center">
+                <Image
+                  src="/especialidade_arredondada_transparente.png"
+                  alt="Especialidades em Psicologia"
+                  width={400}
+                  height={500}
+                  style={{ 
+                    width: '100%', 
+                    maxWidth: '90%', 
+                    height: 'auto',
+                    objectFit: 'contain'
+                  }}
+                  data-aos="fade-right"
+                  data-aos-delay="200"
+                  className="especialidade-img"
+                />
               </div>
-            ))}
+            </div>
+            {/* Cards na direita (desktop) ou embaixo (mobile) */}
+            <div className="col-12 col-lg-8">
+              <div className="row g-4">
+                {especialidades.map(({ icon, title, desc }, index) => (
+                  <div 
+                    key={index} 
+                    className="col-12 col-sm-6"
+                    data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
+                    data-aos-delay={index * 100}
+                  >
+                    <div className="card h-100 border-0 shadow-sm ps-3" style={{ borderLeft: "4px solid #2b4c6f", borderRadius: 16 }}>
+                      <div className="card-body text-center">
+                        <span className="fs-2">{icon}</span>
+                        <h3 className="fw-semibold mt-3 fs-5" style={{ color: "#2b4c6f" }}>{title}</h3>
+                        <p className="text-secondary mt-2 fs-6">{desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -349,37 +382,37 @@ export default function Home() {
 */}
 const especialidades = [
   {
-    icon: "😰",
+    icon: <Image src="/ansiedade_stresse.jpg" width={200} height={150} alt="Ansiedade e Estresse" style={{objectFit: 'contain', borderRadius: 8}} />,
     title: "Ansiedade e Estresse",
     desc:
       "Preocupação excessiva com problemas, pânico, insônia e impacto na comunicação interpessoal.",
   },
   {
-    icon: "😔",
+    icon: <Image src="/depresao.jpg" width={200} height={150} alt="Depressao" style={{objectFit: 'contain', borderRadius: 8}} />,
     title: "Depressão",
     desc:
       "Perda de interesse, fadiga, culpa excessiva, dificuldade em se conectar com os outros.",
   },
   {
-    icon: "💼",
+    icon: <Image src="/burnout.jpg" width={200} height={150} alt="Burnout" style={{objectFit: 'contain', borderRadius: 8}} />,
     title: "Desafios Profissionais",
     desc:
       "Insatisfação, burnout, problemas de equilíbrio entre vida pessoal e profissional.",
   },
   {
-    icon: "🪞",
+    icon: <Image src="/autoestima.jpg" width={200} height={150} alt="Problemas de Autoestima" style={{objectFit: 'contain', borderRadius: 8}} />,
     title: "Problemas de Autoestima",
     desc:
       "Autocrítica, perfeccionismo, medo de desafios e dificuldades nos relacionamentos.",
   },
   {
-    icon: "🤝",
+    icon: <FaUserFriends size={48} color="#ddb08f" />,
     title: "Problemas de Relacionamento",
     desc:
       "Conflitos, diferenças de valores, ciúmes, inseguranças, e falta de comunicação.",
   },
   {
-    icon: "🧠",
+    icon: <FaBrain size={48} color="#ddb08f" />,
     title: "Pensamentos e Emoções",
     desc:
       "Ruminação, pensamento negativo e catastrófico, autocrítica e regulação emocional.",
